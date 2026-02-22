@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Erick Morell | Artist • Designer • Fabricator</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap" rel="stylesheet">
+
+<body>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-content">
+      <h1>Erick Morell</h1>
+      <div class="hero-buttons">
+
+  <a href="art.html" class="btn">Art</a>
+
+  <a href="fabrication.html" class="btn">Fabrication & FX</a>
+
+  <a href="design.html" class="btn">Design & Concept</a>
+
+</div>
+
+      
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <h2>Selected Work</h2>
+
+    <div class="work-grid">
+
+       <div class="work-item">
+    <img src="images/homepage/work1.jpg" alt="Artwork 1">
+  </div>
+
+  <div class="work-item">
+    <img src="images/homepage/work2.jpg" alt="Artwork 2">
+  </div>
+
+  <div class="work-item">
+    <img src="images/homepage/work3.jpg" alt="Artwork 3">
+  </div>
+
+  <div class="work-item">
+    <img src="images/homepage/work4.jpg" alt="Artwork 4">
+  </div>
+
+  <div class="work-item">
+    <img src="images/homepage/work5.jpg" alt="Artwork 5">
+  </div>
+
+  <div class="work-item">
+    <img src="images/homepage/work6.jpg" alt="Artwork 6">
+  </div>
+
+</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2>About</h2>
+
+    <p>
+      Hi, I’m Erick Morell — a multidisciplinary artist, designer, and fabricator
+      with a Bachelor’s Degree in Entertainment Design from the Art Institute of
+      Pittsburgh (Class of 2017).
+    </p>
+
+    <p>
+      My work spans traditional painting and sculpture, murals, theatrical props
+      and makeup, concept art, and 3D design. I combine creativity with precision
+      to bring ideas to life from concept to completion.
+    </p>
+
+    <p>
+      For over a decade, I’ve collaborated with established companies while
+      maintaining an independent freelance practice and developing personal
+      passion projects. I strive to blend artistic vision with technical expertise
+      to create distinctive, compelling work that leaves a lasting impression.
+    </p>
+
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2>Contact</h2>
+
+    <div class="contact-links">
+
+      <a href="https://www.instagram.com/esoterick_art/" target="_blank">Instagram</a>
+
+      <a href="https://www.youtube.com/watch?v=nPpBGsvFfQM" target="_blank">YouTube</a>
+
+      <a href="mailto:erickmorell92@gmail.com">Email</a>
+
+      <a href="tel:17863981549">Call</a>
+
+    </div>
+
+  </section>
+
+  <footer>
+    © 2026 Erick Morell
+  </footer>
+
+</body>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  const arrow = document.createElement('div');
+  arrow.className = 'scroll-arrow';
+  arrow.textContent = '↓';
+
+  document.body.appendChild(arrow);
+
+  function updateArrow() {
+    if (window.scrollY > 100) {
+      arrow.style.opacity = '0';
+    } else {
+      arrow.style.opacity = '0.8';
+    }
+  }
+
+  updateArrow();
+  window.addEventListener('scroll', updateArrow);
+
+});
+</script>
+</html>
