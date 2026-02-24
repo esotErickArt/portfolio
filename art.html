@@ -27,6 +27,10 @@
   <!-- DIGITAL ART ROW -->
   <section class="horizontal-section">
     <h2>Digital Art</h2>
+    <div class="scroll-wrapper">
+
+    <button class="scroll-btn left">&#10094;</button>
+
     <div class="horizontal-scroll">
 
     <img 
@@ -164,7 +168,9 @@
   data-desc="2021"
 >
 
+</div>
 
+    <button class="scroll-btn right">&#10095;</button>
 
 
     </div>
@@ -457,15 +463,22 @@ document.addEventListener('keydown', e => {
 
 /* Next / Prev */
 function nextImage() {
-  currentIndex = (currentIndex + 1) % images.length;
-  openLightbox();
+
+  if (currentIndex < images.length - 1) {
+    currentIndex++;
+    openLightbox();
+  }
+
 }
 
 function prevImage() {
-  currentIndex =
-    (currentIndex - 1 + images.length) % images.length;
-  openLightbox();
-}
+
+  if (currentIndex > 0) {
+    currentIndex--;
+    openLightbox();
+  }
+
+}}
 
 /* Swipe (Mobile) */
 let startX = 0;
