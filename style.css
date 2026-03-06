@@ -401,3 +401,46 @@ footer {
   color: white;
   cursor: pointer;
 }
+
+/* SCROLL ARROWS */
+
+.scroll-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.scroll-btn {
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--accent);
+  border: none;
+  font-size: 2rem;
+  padding: 10px 14px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  transition: opacity 0.3s;
+}
+
+.scroll-btn:hover {
+  opacity: 0.8;
+}
+
+.scroll-btn.left {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.scroll-btn.left {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+/* Hide arrows on desktop if you want later */
+@media (min-width: 769px) {
+  .scroll-btn {
+    display: none;
+  }
+}
