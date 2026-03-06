@@ -432,9 +432,9 @@ footer {
     top: 50%;
     transform: translateY(-50%);
 }
-.scroll-btn.left {
+.scroll-btn.right {
     position: absolute;
-    left: 5px;
+    right: 5px;
     top: 50%;
     transform: translateY(-50%);
 }
