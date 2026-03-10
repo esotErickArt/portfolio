@@ -66,47 +66,95 @@ alt="Animatronic Creature"
 
 <script>
 let images = [];
-let currentIndex = 0;
-
 const lightbox = document.getElementById('lightbox');
-console.log(lightbox);
 const lightboxImg = document.getElementById('lightbox-img');
+const lightboxTitle = document.getElementById('lightbox-title');
+const lightboxMedium = document.getElementById('lightbox-medium');
+const lightboxDesc = document.getElementById('lightbox-desc');
 const closeBtn = document.querySelector('.lightbox-close');
 
+let currentIndex = 0;
+
+/* Open lightbox */
+images.forEach((img, index) => {
+  img.addEventListener('click', () => {
+    currentIndex = index;
+    openLightbox();
+  });
+});
+
 function openLightbox() {
-lightboxImg.src = images[currentIndex].src;
-lightbox.style.display = 'flex';
+  const img = images[currentIndex];
+
+  lightboxImg.src = img.src;
+  lightboxTitle.textContent = img.dataset.title;
+  lightboxMedium.textContent = img.dataset.medium;
+  lightboxDesc.textContent = img.dataset.desc;
+
+  lightbox.classList.add('show');
+  document.body.style.overflow = 'hidden';
 }
 
+/* Close */
 function closeLightbox() {
-lightbox.style.display = 'show';
+  lightbox.classList.remove('show');
+  document.body.style.overflow = 'auto';
 }
 
 closeBtn.addEventListener('click', closeLightbox);
 
 lightbox.addEventListener('click', e => {
-if (e.target === lightbox) closeLightbox();
+  if (e.target === lightbox) closeLightbox();
 });
 
-document.querySelectorAll('.project-thumb').forEach(thumb => {
+/* Keyboard navigation */
+document.addEventListener('keydown', e => {
 
-thumb.addEventListener('click', () => {
+  if (!lightbox.classList.contains('show')) return;
 
-const project = thumb.dataset.project;
+  if (e.key === 'Escape') closeLightbox();
 
-const gallery = document.getElementById(project + '-gallery');
+  if (e.key === 'ArrowRight') nextImage();
 
-images = gallery.getElementsByTagName('img');
-
-currentIndex = 0;
-
-lightboxImg.src = images[currentIndex].src;
-lightbox.style.display = "show";
+  if (e.key === 'ArrowLeft') prevImage();
 
 });
+
+/* Next / Prev */
+function nextImage() {
+
+  if (currentIndex < images.length - 1) {
+    currentIndex++;
+    openLightbox();
+  }
+
+}
+
+function prevImage() {
+
+  if (currentIndex > 0) {
+    currentIndex--;
+    openLightbox();
+  }
+
+}
+
+/* Swipe (Mobile) */
+let startX = 0;
+
+lightbox.addEventListener('touchstart', e => {
+  startX = e.touches[0].clientX;
+});
+
+lightbox.addEventListener('touchend', e => {
+
+  const endX = e.changedTouches[0].clientX;
+  const diff = startX - endX;
+
+  if (diff > 50) nextImage();     // swipe left
+  if (diff < -50) prevImage();   // swipe right
 
 });
 </script>
-
 </body>
 </html>
