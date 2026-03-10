@@ -89,11 +89,7 @@ if (e.target === lightbox) closeLightbox();
 
 document.querySelectorAll('.project-thumb').forEach(thumb => {
 
-console.log(images.length);
-
 thumb.addEventListener('click', () => {
-
-console.log("thumbnail clicked");
 
 const project = thumb.dataset.project;
 
@@ -101,9 +97,7 @@ console.log(project);
 
 const gallery = document.getElementById(project + '-gallery');
 
-console.log(gallery);
-
-images = gallery.querySelectorAll('.lightbox-img');
+images = Array.from(gallery.children);
 
 currentIndex = 0;
 
