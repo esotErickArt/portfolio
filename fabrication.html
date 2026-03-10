@@ -91,6 +91,8 @@ document.querySelectorAll('.project-thumb').forEach(thumb => {
 
 thumb.addEventListener('click', () => {
 
+console.log("thumbnail clicked");
+
 const project = thumb.dataset.project;
 
 const gallery = document.getElementById(project + '-gallery');
