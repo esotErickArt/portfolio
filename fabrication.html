@@ -100,7 +100,7 @@ document.querySelectorAll('.project-thumb').forEach(thumb => {
 
     const gallery = document.getElementById(project + '-gallery');
 
-    images = gallery.querySelectorAll('img');
+    images = Array.from(gallery.children);
 
     currentIndex = 0;
 
