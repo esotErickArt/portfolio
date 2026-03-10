@@ -79,7 +79,7 @@ lightbox.style.display = 'flex';
 }
 
 function closeLightbox() {
-lightbox.style.display = 'none';
+lightbox.style.display = 'show';
 }
 
 closeBtn.addEventListener('click', closeLightbox);
@@ -105,7 +105,7 @@ alert(images.length);
 currentIndex = 0;
 
 lightboxImg.src = images[currentIndex].src;
-lightbox.style.display = "flex";
+lightbox.style.display = "show";
 
 });
 
