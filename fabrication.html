@@ -40,5 +40,37 @@ alt="Animatronic Creature"
   </div>
 </section> 
 
+<div id="animatronic-creature-gallery" class="project-gallery" style="display:none;">
+
+<img src="images/fabrication/animatronic-creature/1.jpg" class="lightbox-img">
+<img src="images/fabrication/animatronic-creature/2.jpg" class="lightbox-img">
+<img src="images/fabrication/animatronic-creature/3.jpg" class="lightbox-img">
+<img src="images/fabrication/animatronic-creature/4.jpg" class="lightbox-img">
+
+
+</div>
+
+<script>
+document.querySelectorAll('.project-thumb').forEach(thumb => {
+
+thumb.addEventListener('click', () => {
+
+const project = thumb.dataset.project;
+
+const gallery = document.getElementById(project + '-gallery');
+
+const projectImages = gallery.querySelectorAll('.lightbox-img');
+
+images = projectImages;
+
+currentIndex = 0;
+
+openLightbox();
+
+});
+
+});
+</script>
+
 </body>
 </html>
