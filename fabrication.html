@@ -92,15 +92,11 @@ document.querySelectorAll('.project-thumb').forEach(thumb => {
 
 thumb.addEventListener('click', () => {
 
-alert("clicked");
-
 const project = thumb.dataset.project;
 
 const gallery = document.getElementById(project + '-gallery');
 
 images = gallery.getElementsByTagName('img');
-
-alert(images.length);
 
 currentIndex = 0;
 
