@@ -457,3 +457,31 @@ width:auto;
 border-radius:8px;
 cursor:pointer;
 }
+#fabrication-lightbox-img{
+max-width:90vw;
+max-height:80vh;
+width:auto;
+height:auto;
+object-fit:contain;
+}
+
+.lightbox-nav button{
+position:fixed;
+top:50%;
+transform:translateY(-50%);
+background:rgba(0,0,0,0.6);
+border:none;
+color:var(--accent);
+font-size:2rem;
+padding:12px 16px;
+cursor:pointer;
+z-index:10000;
+}
+
+#fab-prev{
+left:20px;
+}
+
+#fab-next{
+right:20px;
+}
