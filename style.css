@@ -444,3 +444,16 @@ footer {
     display: none;
   }
 }
+
+.projects-row{
+display:flex;
+gap:20px;
+padding:20px 40px;
+}
+
+.project-card img{
+height:200px;
+width:auto;
+border-radius:8px;
+cursor:pointer;
+}
