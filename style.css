@@ -485,3 +485,8 @@ left:20px;
 #fab-next{
 right:20px;
 }
+
+body.lightbox-open{
+overflow:hidden;
+touch-action:none;
+}

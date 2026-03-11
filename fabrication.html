@@ -70,10 +70,12 @@ thumb.addEventListener("click", () => {
 index = 0;
 img.src = gallery[index];
 lightbox.classList.add("show");
+document.body.classList.add("lightbox-open");
 });
 
 document.querySelector(".lightbox-close").onclick = () => {
 lightbox.classList.remove("show");
+document.body.classList.remove("lightbox-open");
 };
 
 document.getElementById("fab-next").onclick = () => {
