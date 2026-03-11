@@ -86,6 +86,26 @@ index = (index - 1 + gallery.length) % gallery.length;
 img.src = gallery[index];
 };
 
+document.addEventListener("keydown", (e) => {
+
+if (!lightbox.classList.contains("show")) return;
+
+if (e.key === "ArrowRight") {
+index = (index + 1) % gallery.length;
+img.src = gallery[index];
+}
+
+if (e.key === "ArrowLeft") {
+index = (index - 1 + gallery.length) % gallery.length;
+img.src = gallery[index];
+}
+
+if (e.key === "Escape") {
+lightbox.classList.remove("show");
+}
+
+});
+
 </script>
 
 </body>
