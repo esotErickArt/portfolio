@@ -9,27 +9,75 @@
 
 <body>
 
-<header class="sub-header">
-<a href="index.html" class="logo">Erick Morell</a>
-<a href="index.html" class="back-link">← Home</a>
+<header>
+<h1>Fabrication & FX</h1>
 </header>
 
-<div class="page-title">
-<h1>Fabrication & FX</h1>
-</div>
+<main>
 
-<section class="horizontal-section">
+<section class="projects">
 
-<h2>Projects</h2>
-
-<div class="horizontal-scroll">
-
+<div class="project">
 <img src="images/fabrication/animatronic-creature/1.jpg" alt="Animatronic Creature">
-
+<h3>Animatronic Creature</h3>
 </div>
 
 </section>
 
-</body>
+</main>
+
+<div id="fabrication-lightbox" class="lightbox">
+
+<div class="lightbox-content">
+
+<span class="lightbox-close">&times;</span>
+
+<img id="fabrication-lightbox-img">
+
+<div class="lightbox-nav">
+<button id="fab-prev">◀</button>
+<button id="fab-next">▶</button>
+</div>
+
+</div>
+</div>
+
+<script>
+
+const gallery = [
+"images/fabrication/animatronic-creature/1.jpg",
+"images/fabrication/animatronic-creature/2.jpg",
+"images/fabrication/animatronic-creature/3.jpg",
+"images/fabrication/animatronic-creature/4.jpg"
+];
+
+let index = 0;
+
+const lightbox = document.getElementById("fabrication-lightbox");
+const img = document.getElementById("fabrication-lightbox-img");
+
+const thumb = document.querySelector(".horizontal-scroll img");
+
+thumb.addEventListener("click", () => {
+index = 0;
+img.src = gallery[index];
+lightbox.classList.add("show");
+});
+
+document.querySelector(".lightbox-close").onclick = () => {
+lightbox.classList.remove("show");
+};
+
+document.getElementById("fab-next").onclick = () => {
+index = (index + 1) % gallery.length;
+img.src = gallery[index];
+};
+
+document.getElementById("fab-prev").onclick = () => {
+index = (index - 1 + gallery.length) % gallery.length;
+img.src = gallery[index];
+};
+
+</script>
 </body>
 </html>
