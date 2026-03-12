@@ -181,11 +181,11 @@ footer {
 
 @media (max-width: 768px) {
   h1 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
 
   section {
-    padding: 1.6rem 5%;
+    padding: 0.8rem 5%;
   }
 }
 
