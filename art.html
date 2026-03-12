@@ -400,6 +400,11 @@
       <p id="lightbox-medium"></p>
       <p id="lightbox-desc"></p>
     </div>
+ 
+<div class="lightbox-nav">
+<button id="art-prev">◀</button>
+<button id="art-next">▶</button>
+</div>
 
   </div>
 </div>
@@ -480,22 +485,9 @@ function prevImage() {
 
 }
 
-/* Swipe (Mobile) */
-let startX = 0;
+document.getElementById("art-next").onclick = nextImage;
+document.getElementById("art-prev").onclick = prevImage;
 
-lightbox.addEventListener('touchstart', e => {
-  startX = e.touches[0].clientX;
-});
-
-lightbox.addEventListener('touchend', e => {
-
-  const endX = e.changedTouches[0].clientX;
-  const diff = startX - endX;
-
-  if (diff > 50) nextImage();     // swipe left
-  if (diff < -50) prevImage();   // swipe right
-
-});
 </script>
 </body>
 </html>
