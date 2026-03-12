@@ -219,15 +219,14 @@ footer {
 /* PAGE TITLE */
 
 .page-title {
-  padding: 3rem 10% 2rem;
+  padding: 1.5rem 10% 0.8rem;
 }
 
 .page-title h1 {
-  font-size: 3rem;
+  font-size: 2.4rem;
   font-family: "Exo 2", sans-serif;
   color: var(--accent);
 }
-
 /* HORIZONTAL GALLERY */
 
 .horizontal-section {
