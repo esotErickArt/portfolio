@@ -516,3 +516,39 @@ touch-action:none;
 .lightbox-content{
 position:relative;
 }
+
+/* MOBILE LIGHTBOX ARROWS FIX */
+
+@media (max-width:768px){
+
+#art-prev,
+#art-next,
+#fab-prev,
+#fab-next{
+
+position:fixed !important;
+top:50% !important;
+transform:translateY(-50%) !important;
+
+background:transparent !important;
+border:none !important;
+
+color:rgba(255,255,255,0.7) !important;
+font-size:1.8rem !important;
+padding:6px !important;
+
+z-index:999999 !important;
+
+}
+
+#art-prev,
+#fab-prev{
+left:6px !important;
+}
+
+#art-next,
+#fab-next{
+right:6px !important;
+}
+
+}
