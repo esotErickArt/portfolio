@@ -488,6 +488,27 @@ function prevImage() {
 document.getElementById("art-next").onclick = nextImage;
 document.getElementById("art-prev").onclick = prevImage;
 
+/* SHOW SCROLL ARROWS TEMPORARILY */
+
+document.querySelectorAll('.scroll-wrapper').forEach(wrapper => {
+
+let timer;
+
+function showArrows(){
+wrapper.classList.add('show-arrows');
+
+clearTimeout(timer);
+
+timer = setTimeout(() => {
+wrapper.classList.remove('show-arrows');
+}, 2000);
+}
+
+wrapper.addEventListener('touchstart', showArrows);
+wrapper.addEventListener('mousemove', showArrows);
+
+});
+
 </script>
 </body>
 </html>
