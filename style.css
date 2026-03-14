@@ -96,6 +96,38 @@ h2::after {
   background: var(--accent);
 }
 
+/* WORK GRID (Selected Works on homepage) */
+
+.work-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 1.5rem;
+}
+
+.work-item {
+background: #111;
+height: 220px;
+overflow: hidden;
+border-radius: 6px;
+position: relative;
+transition: 0.3s;
+}
+
+.work-item img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: 0.4s;
+}
+
+.work-item:hover {
+box-shadow: 0 0 20px rgba(0,229,204,0.4);
+}
+
+.work-item:hover img {
+transform: scale(1.05);
+}
+
 /* SUB PAGE HEADER */
 
 .sub-header {
