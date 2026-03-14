@@ -234,7 +234,7 @@ footer {
 }
 
 .horizontal-section h2 {
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.4rem;
 }
 
 .horizontal-scroll {
@@ -273,7 +273,7 @@ footer {
   }
 
   .horizontal-section {
-    padding: 2rem 5%;
+    padding: 0.6rem 5%;
   }
 
   .horizontal-scroll img {
