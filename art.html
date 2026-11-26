@@ -16,8 +16,14 @@
   <!-- SIMPLE HEADER -->
   <header class="sub-header">
     <a href="index.html" class="logo">Erick Morell</a>
-    <a href="index.html" class="back-link">← Home</a>
-  </header>
+
+    <nav class="sub-nav">
+        <a href="art.html" class="nav-link active" aria-current="page">Art</a>
+        <a href="fabrication.html" class="nav-link">Sculptures & Fabrication</a>
+        <a href="design.html" class="nav-link">Design & Concept</a>
+        <a href="index.html" class="back-link">← Home</a>
+    </nav>
+</header>
 
   <!-- PAGE TITLE -->
   <section class="page-title">
@@ -529,6 +535,28 @@ wrapper.classList.remove('show-arrows');
 
 wrapper.addEventListener('touchstart', showArrows);
 wrapper.addEventListener('mousemove', showArrows);
+
+});
+
+document.querySelectorAll('.scroll-wrapper').forEach(wrapper => {
+
+    const gallery = wrapper.querySelector('.horizontal-scroll');
+    const leftBtn = wrapper.querySelector('.scroll-btn.left');
+    const rightBtn = wrapper.querySelector('.scroll-btn.right');
+
+    leftBtn.addEventListener('click', () => {
+        gallery.scrollBy({
+            left: -gallery.clientWidth * 0.8,
+            behavior: 'smooth'
+        });
+    });
+
+    rightBtn.addEventListener('click', () => {
+        gallery.scrollBy({
+            left: gallery.clientWidth * 0.8,
+            behavior: 'smooth'
+        });
+    });
 
 });
 

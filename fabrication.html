@@ -4,28 +4,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fabrication & FX | Erick Morell</title>
+<title>Sculptures & Fabrication | Erick Morell</title>
 <link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
 <header class="sub-header">
-<a href="index.html" class="logo">Erick Morell</a>
-<a href="index.html" class="back-link">← Home</a>
+ <a href="index.html" class="logo">Erick Morell</a>
+
+    <nav class="sub-nav">
+        <a href="art.html" class="nav-link">Art</a>
+        <a href="fabrication.html" class="nav-link active" aria-current="page">Sculptures & Fabrication</a>
+        <a href="design.html" class="nav-link">Design & Concept</a>
+        <a href="index.html" class="back-link">← Home</a>
+    </nav>
 </header>
 
 <div class="page-title">
-<h1>Fabrication & FX</h1>
+<h1>Sculptures & Fabrication</h1>
 </div>
 
 <section class="horizontal-section">
 
-<h2>Projects</h2>
+<h2>Project Gallery</h2>
 
-<div class="horizontal-scroll">
+<div class="projects-row">
 
-<img src="images/fabrication/animatronic-creature/1.jpg" alt="Animatronic Creature">
+    <div class="project-card">
+        <img src="images/fabrication/animatronic-creature/1.jpg" alt="Animatronic Creature">
+        <h3>Animatronic Creature</h3>
+    </div>
+
+    <div class="project-card">
+        <img src="images/fabrication/Scrappy/Scrappy1.jpg" alt="Moldmaking for Scrappy">
+        <h3>Moldmaking for Scrappy</h3>
+    </div>
 
 </div>
 
@@ -39,6 +56,7 @@
 <span class="lightbox-close">&times;</span>
 
 <img id="fabrication-lightbox-img">
+<div id="fabrication-image-caption"></div>
 
 <div class="lightbox-nav">
 <button id="fab-prev">◀</button>
@@ -52,60 +70,91 @@
 
 <script>
 
-const gallery = [
-"images/fabrication/animatronic-creature/1.jpg",
-"images/fabrication/animatronic-creature/2.jpg",
-"images/fabrication/animatronic-creature/3.jpg",
-"images/fabrication/animatronic-creature/4.jpg"
-];
+const projects = {
+    "Animatronic Creature": [
+        "images/fabrication/animatronic-creature/1.jpg",
+        "images/fabrication/animatronic-creature/2.jpg",
+        "images/fabrication/animatronic-creature/3.jpg",
+        "images/fabrication/animatronic-creature/4.jpg"
+    ],
 
+    "Moldmaking for Scrappy": [
+    {
+        src: "images/fabrication/Scrappy/mold_1.jpg",
+        caption: "Silicone Mold Preparation"
+    },
+    {
+        src: "images/fabrication/Scrappy/mold_3.jpg",
+        caption: "Silicone Mold Preparation for Replicas"
+    },
+    {
+        src: "images/fabrication/Scrappy/mold_2.jpg",
+        caption: "Two-Part Silicone Matrix Mold with Fiberglass Shell"
+    },
+    {
+        src: "images/fabrication/Scrappy/Scrappy1.jpg",
+        caption: "Scrappy"
+    }
+]
+};
+
+let gallery = [];
 let index = 0;
 
 const lightbox = document.getElementById("fabrication-lightbox");
 const img = document.getElementById("fabrication-lightbox-img");
+const caption = document.getElementById("fabrication-image-caption");
 
-const thumb = document.querySelector(".horizontal-scroll img");
+function showImage() {
+    const current = gallery[index];
 
-thumb.addEventListener("click", () => {
-index = 0;
-img.src = gallery[index];
-lightbox.classList.add("show");
-document.body.classList.add("lightbox-open");
+    img.src = typeof current === "string" ? current : current.src;
+    caption.textContent = typeof current === "string" ? "" : current.caption;
+}
+
+document.querySelectorAll(".project-card").forEach(card => {
+    card.addEventListener("click", () => {
+        const title = card.querySelector("h3").textContent;
+        gallery = projects[title];
+        index = 0;
+        showImage();
+
+        lightbox.classList.add("show");
+        document.body.classList.add("lightbox-open");
+    });
 });
 
-document.querySelector(".lightbox-close").onclick = () => {
-lightbox.classList.remove("show");
-document.body.classList.remove("lightbox-open");
-};
+function closeLightbox() {
+    lightbox.classList.remove("show");
+    document.body.classList.remove("lightbox-open");
+}
+
+document.querySelector(".lightbox-close").onclick = closeLightbox;
 
 document.getElementById("fab-next").onclick = () => {
-index = (index + 1) % gallery.length;
-img.src = gallery[index];
+    index = (index + 1) % gallery.length;
+    showImage();
 };
 
 document.getElementById("fab-prev").onclick = () => {
-index = (index - 1 + gallery.length) % gallery.length;
-img.src = gallery[index];
+    index = (index - 1 + gallery.length) % gallery.length;
+    showImage();
 };
 
-document.addEventListener("keydown", (e) => {
+document.addEventListener("keydown", e => {
+    if (!lightbox.classList.contains("show")) return;
 
-if (!lightbox.classList.contains("show")) return;
-
-if (e.key === "ArrowRight") {
-index = (index + 1) % gallery.length;
-img.src = gallery[index];
+    if (e.key === "ArrowRight") {
+    index = (index + 1) % gallery.length;
+    showImage();
 }
 
 if (e.key === "ArrowLeft") {
-index = (index - 1 + gallery.length) % gallery.length;
-img.src = gallery[index];
-}
+    index = (index - 1 + gallery.length) % gallery.length;
+    showImage();
+    }
 
-if (e.key === "Escape") {
-lightbox.classList.remove("show");
-}
-
+    if (e.key === "Escape") closeLightbox();
 });
 
 </script>
