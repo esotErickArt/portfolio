@@ -4,134 +4,127 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Erick Morell | Artist • Designer • Fabricator</title>
-
-  <link rel="stylesheet" href="style.css">
-
+  <link rel="stylesheet" href="style.css?v=20261126-featured-relief-1">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <header class="home-header">
+    <a class="home-logo" href="index.html">Erick Morell</a>
+    <nav class="home-nav" aria-label="Main navigation">
+      <a href="art.html" class="btn">Art</a>
+      <a href="fabrication.html" class="btn">Sculptures & Fabrication</a>
+      <a href="design.html" class="btn">Design & Concept</a>
+    </nav>
+  </header>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-content">
-      <h1>Erick Morell</h1>
-      <div class="hero-buttons">
-
-  <a href="art.html" class="btn">Art</a>
-
-  <a href="fabrication.html" class="btn">Sculptures & Fabrication</a>
-
-  <a href="design.html" class="btn">Design & Concept</a>
-
-</div>
-
-      
-  </section>
-
-  <!-- WORK -->
   <section id="work">
     <h2>Selected Work</h2>
-
     <div class="work-grid">
-
-       <div class="work-item">
-    <img src="./images/Homepage/work1.jpg" alt="Artwork 1">
-  </div>
-
-  <div class="work-item">
-    <img src="./images/Homepage/work2.jpg" alt="Artwork 2">
-  </div>
-
-  <div class="work-item">
-    <img src="./images/Homepage/work3.jpg" alt="Artwork 3">
-  </div>
-
-  <div class="work-item">
-    <img src="./images/Homepage/work4.jpg" alt="Artwork 4">
-  </div>
-
-  <div class="work-item">
-    <img src="./images/Homepage/work5.jpg" alt="Artwork 5">
-  </div>
-
-  <div class="work-item">
-    <img src="./images/Homepage/work6.jpg" alt="Artwork 6">
-  </div>
-
-</div>
+      <article class="work-item featured-work">
+        <button class="featured-video-trigger" id="open-relief-video" type="button" aria-label="Play beauty salon bas-relief video">
+          <img src="./images/Homepage/beauty-salon-relief.jpg" alt="Illuminated bas-relief sculpture installation at a beauty salon">
+          <span class="play-indicator" aria-hidden="true">▶</span>
+        </button>
+        <div class="featured-caption">
+          <div>
+            <h3>Beauty Salon Bas-Relief</h3>
+            <p>Custom sculptural installation</p>
+          </div>
+          <a href="fabrication.html" class="project-link">View fabrication work</a>
+        </div>
+      </article>
+      <div class="work-item"><img src="./images/Homepage/work1.jpg" alt="Artwork 1"></div>
+      <div class="work-item"><img src="./images/Homepage/work2.jpg" alt="Artwork 2"></div>
+      <div class="work-item"><img src="./images/Homepage/work3.jpg" alt="Artwork 3"></div>
+      <div class="work-item"><img src="./images/Homepage/work4.jpg" alt="Artwork 4"></div>
+      <div class="work-item"><img src="./images/Homepage/work5.jpg" alt="Artwork 5"></div>
+      <div class="work-item"><img src="./images/Homepage/work6.jpg" alt="Artwork 6"></div>
+    </div>
   </section>
 
-  <!-- ABOUT -->
+  <div class="video-lightbox" id="relief-video-lightbox" aria-hidden="true">
+    <button class="video-lightbox-close" id="close-relief-video" type="button" aria-label="Close video">×</button>
+    <video id="relief-video" controls playsinline preload="none">
+      <source src="./videos/beauty-salon-relief.mp4" type="video/mp4">
+      Your browser does not support HTML video.
+    </video>
+  </div>
+
   <section id="about">
     <h2>About</h2>
-
     <p>
       Hi, I’m Erick Morell — a multidisciplinary artist, designer, and fabricator
       with a Bachelor’s Degree in Entertainment Design from the Art Institute of
       Pittsburgh (Class of 2017).
     </p>
-
     <p>
       My work spans traditional painting and sculpture, murals, theatrical props
       and makeup, concept art, and 3D design. I combine creativity with precision
       to bring ideas to life from concept to completion.
     </p>
-
     <p>
       For over a decade, I’ve collaborated with established companies while
       maintaining an independent freelance practice and developing personal
       passion projects. I strive to blend artistic vision with technical expertise
       to create distinctive, compelling work that leaves a lasting impression.
     </p>
-
   </section>
 
-  <!-- CONTACT -->
   <section id="contact">
     <h2>Contact</h2>
-
     <div class="contact-links">
-
-      <a href="https://www.instagram.com/esoterick_art/" target="_blank">Instagram</a>
-
-      <a href="https://www.youtube.com/watch?v=nPpBGsvFfQM" target="_blank">YouTube</a>
-
+      <a href="https://www.instagram.com/esoterick_art/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.youtube.com/watch?v=nPpBGsvFfQM" target="_blank" rel="noopener">YouTube</a>
       <a href="mailto:erickmorell92@gmail.com">Email</a>
-
       <a href="tel:17863981549">Call</a>
-
     </div>
-
   </section>
 
-  <footer>
-    © 2026 Erick Morell
-  </footer>
+  <footer>© 2026 Erick Morell</footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const overlay = document.getElementById('relief-video-lightbox');
+      const video = document.getElementById('relief-video');
+      const openButton = document.getElementById('open-relief-video');
+      const closeButton = document.getElementById('close-relief-video');
+
+      function openVideo() {
+        overlay.classList.add('show');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('lightbox-open');
+        video.currentTime = 0;
+        video.play().catch(function () {});
+      }
+
+      function closeVideo() {
+        video.pause();
+        video.currentTime = 0;
+        overlay.classList.remove('show');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('lightbox-open');
+      }
+
+      openButton.addEventListener('click', openVideo);
+      closeButton.addEventListener('click', closeVideo);
+      overlay.addEventListener('click', function (event) {
+        if (event.target === overlay) closeVideo();
+      });
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && overlay.classList.contains('show')) closeVideo();
+      });
+
+      const arrow = document.createElement('div');
+      arrow.className = 'scroll-arrow';
+      arrow.textContent = '↓';
+      document.body.appendChild(arrow);
+      function updateArrow() {
+        arrow.style.opacity = window.scrollY > 100 ? '0' : '0.8';
+      }
+      updateArrow();
+      window.addEventListener('scroll', updateArrow);
+    });
+  </script>
 </body>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-
-  const arrow = document.createElement('div');
-  arrow.className = 'scroll-arrow';
-  arrow.textContent = '↓';
-
-  document.body.appendChild(arrow);
-
-  function updateArrow() {
-    if (window.scrollY > 100) {
-      arrow.style.opacity = '0';
-    } else {
-      arrow.style.opacity = '0.8';
-    }
-  }
-
-  updateArrow();
-  window.addEventListener('scroll', updateArrow);
-
-});
-</script>
 </html>
