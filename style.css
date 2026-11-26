@@ -453,27 +453,33 @@ right:6px;
 /* MOBILE NAVIGATION REFINEMENT */
 @media (max-width: 768px) {
   .sub-header {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 12px;
+    row-gap: 8px;
     padding: 14px 5%;
   }
 
   .sub-header .logo {
-    display: block;
+    grid-column: 1;
+    grid-row: 1;
     white-space: nowrap;
-    text-align: left;
   }
 
+  /* Let the navigation links participate in the header grid. */
   .sub-nav {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-    width: 100%;
+    display: contents;
   }
 
-  .sub-nav .nav-link,
   .sub-nav .back-link {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    white-space: nowrap;
+  }
+
+  .sub-nav .nav-link {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -485,5 +491,21 @@ right:6px;
     font-size: 0.9rem;
     overflow-wrap: break-word;
   }
-}
 
+  /* Row 2: Art | Design & Concept */
+  .sub-nav .nav-link:nth-child(1) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .sub-nav .nav-link:nth-child(3) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  /* Row 3: Sculptures & Fabrication spans the full width. */
+  .sub-nav .nav-link:nth-child(2) {
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+}
