@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Erick Morell | Artist • Designer • Fabricator</title>
-  <link rel="stylesheet" href="style.css?v=20261128-desktop-crossfade-mobile-5">
+  <link rel="stylesheet" href="style.css?v=20261128-mobile-infinite-loop-6">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
@@ -197,6 +197,12 @@
       const dots = document.getElementById('slideshow-dots');
       const count = document.getElementById('slideshow-count');
       const track = document.getElementById('slideshow-track');
+      const mobileLoopSlide = slides[0].cloneNode(true);
+      mobileLoopSlide.classList.remove('active');
+      mobileLoopSlide.setAttribute('aria-hidden', 'true');
+      mobileLoopSlide.setAttribute('data-mobile-clone', 'true');
+      track.appendChild(mobileLoopSlide);
+      let mobileVisualIndex = 0;
       let currentSlide = 0;
       let slideshowTimer;
       let touchStartX = 0;
@@ -211,18 +217,38 @@
       });
 
       function showSlide(next, restartTimer) {
+        const previousSlide = currentSlide;
+        const movingForward = next > previousSlide || (previousSlide === slides.length - 1 && next === slides.length);
         currentSlide = (next + slides.length) % slides.length;
         slides.forEach((slide, i) => {
           slide.classList.toggle('active', i === currentSlide);
           slide.setAttribute('aria-hidden', i === currentSlide ? 'false' : 'true');
         });
         if (window.matchMedia('(max-width: 768px)').matches) {
-          track.style.transform = 'translate3d(-' + (currentSlide * 100) + '%, 0, 0)';
+          if (previousSlide === slides.length - 1 && currentSlide === 0 && movingForward) {
+            mobileVisualIndex = slides.length;
+            mobileLoopSlide.setAttribute('aria-hidden', 'false');
+          } else {
+            mobileVisualIndex = currentSlide;
+            mobileLoopSlide.setAttribute('aria-hidden', 'true');
+          }
+          track.style.transform = 'translate3d(-' + (mobileVisualIndex * 100) + '%, 0, 0)';
         }
         Array.from(dots.children).forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
         count.textContent = String(currentSlide + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
         if (restartTimer) startSlideshow();
       }
+      track.addEventListener('transitionend', function (event) {
+        if (event.propertyName !== 'transform' || mobileVisualIndex !== slides.length) return;
+        track.classList.add('no-transition');
+        mobileVisualIndex = 0;
+        track.style.transform = 'translate3d(0, 0, 0)';
+        mobileLoopSlide.setAttribute('aria-hidden', 'true');
+        requestAnimationFrame(function () {
+          track.classList.remove('no-transition');
+        });
+      });
+      mobileLoopSlide.querySelector('.slide-play')?.addEventListener('click', openVideo);
       function startSlideshow() {
         clearInterval(slideshowTimer);
         if (!document.hidden) {
