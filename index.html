@@ -21,19 +21,34 @@
   <section id="work">
     <h2>Selected Works</h2>
     <div class="work-grid">
-      <article class="work-item featured-work">
-        <button class="featured-video-trigger" id="open-relief-video" type="button" aria-label="Play beauty salon bas-relief video">
-          <img src="./images/Homepage/beauty-salon-relief.jpg" alt="Illuminated bas-relief sculpture installation at a beauty salon">
-          <span class="play-indicator" aria-hidden="true">▶</span>
-        </button>
-        <div class="featured-caption">
-          <div>
-            <h3>Beauty Salon Bas-Relief</h3>
-            <p>Custom sculptural installation</p>
+      <div class="featured-projects">
+        <article class="work-item featured-work">
+          <button class="featured-video-trigger" id="open-relief-video" type="button" aria-label="Play beauty salon bas-relief video">
+            <img src="./images/Homepage/beauty-salon-relief.jpg" alt="Illuminated bas-relief sculpture installation at a beauty salon">
+            <span class="play-indicator" aria-hidden="true">▶</span>
+          </button>
+          <div class="featured-caption">
+            <div>
+              <h3>Beauty Salon Bas-Relief</h3>
+              <p>Custom sculptural installation</p>
+            </div>
+            <a href="fabrication.html" class="project-link">View fabrication work</a>
           </div>
-          <a href="fabrication.html" class="project-link">View fabrication work</a>
-        </div>
-      </article>
+        </article>
+        <article class="work-item featured-work">
+          <button class="featured-video-trigger" id="open-firefly-gallery" type="button" aria-label="View Firefly Totem installation photographs">
+            <img src="./images/fabrication/Fireflies%20Statue/6-Final%20Product%20on%20Stage.jpg" alt="Firefly Totem daytime festival installation">
+            <span class="play-indicator" aria-hidden="true">▶</span>
+          </button>
+          <div class="featured-caption">
+            <div>
+              <h3>Firefly Totem</h3>
+              <p>Sculptural installation · Custom fabrication</p>
+            </div>
+            <a href="firefly-totem.html" class="project-link">View project</a>
+          </div>
+        </article>
+      </div>
       <div class="work-item"><img src="./images/Homepage/work1.jpg" alt="Artwork 1"></div>
       <div class="work-item"><img src="./images/Homepage/work2.jpg" alt="Artwork 2"></div>
       <div class="work-item"><img src="./images/Homepage/work3.jpg" alt="Artwork 3"></div>
@@ -49,6 +64,16 @@
       <source src="./videos/beauty-salon-relief.mp4" type="video/mp4">
       Your browser does not support HTML video.
     </video>
+  </div>
+
+  <div class="photo-lightbox" id="firefly-photo-lightbox" aria-hidden="true">
+    <button class="photo-lightbox-close" id="close-firefly-gallery" type="button" aria-label="Close gallery">×</button>
+    <button class="photo-lightbox-nav photo-prev" id="firefly-prev" type="button" aria-label="Previous image">‹</button>
+    <figure>
+      <img id="firefly-gallery-image" src="images/fabrication/Fireflies%20Statue/6-Final%20Product%20on%20Stage.jpg" alt="Firefly Totem daytime installation">
+      <figcaption id="firefly-gallery-caption">Daytime installation</figcaption>
+    </figure>
+    <button class="photo-lightbox-nav photo-next" id="firefly-next" type="button" aria-label="Next image">›</button>
   </div>
 
   <section id="about">
@@ -124,6 +149,56 @@
       }
       updateArrow();
       window.addEventListener('scroll', updateArrow);
+
+      const fireflyImages = [
+        { src: 'images/fabrication/Fireflies%20Statue/6-Final%20Product%20on%20Stage.jpg', caption: 'Daytime installation' },
+        { src: 'images/fabrication/Fireflies%20Statue/7-Final%20Product%20on%20Stage.jpg', caption: 'Nighttime installation' }
+      ];
+      const fireflyOverlay = document.getElementById('firefly-photo-lightbox');
+      const fireflyImage = document.getElementById('firefly-gallery-image');
+      const fireflyCaption = document.getElementById('firefly-gallery-caption');
+      let fireflyIndex = 0;
+      let fireflyAdvanceTimer;
+
+      function showFireflyImage() {
+        fireflyImage.src = fireflyImages[fireflyIndex].src;
+        fireflyCaption.textContent = fireflyImages[fireflyIndex].caption;
+      }
+      function closeFireflyGallery() {
+        clearTimeout(fireflyAdvanceTimer);
+        fireflyOverlay.classList.remove('show');
+        fireflyOverlay.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('lightbox-open');
+      }
+      function openFireflyGallery() {
+        fireflyIndex = 0;
+        showFireflyImage();
+        fireflyOverlay.classList.add('show');
+        fireflyOverlay.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('lightbox-open');
+        fireflyAdvanceTimer = setTimeout(function () {
+          fireflyIndex = 1;
+          showFireflyImage();
+        }, 3000);
+      }
+      function stepFirefly(direction) {
+        clearTimeout(fireflyAdvanceTimer);
+        fireflyIndex = (fireflyIndex + direction + fireflyImages.length) % fireflyImages.length;
+        showFireflyImage();
+      }
+      document.getElementById('open-firefly-gallery').addEventListener('click', openFireflyGallery);
+      document.getElementById('close-firefly-gallery').addEventListener('click', closeFireflyGallery);
+      document.getElementById('firefly-prev').addEventListener('click', function () { stepFirefly(-1); });
+      document.getElementById('firefly-next').addEventListener('click', function () { stepFirefly(1); });
+      fireflyOverlay.addEventListener('click', function (event) {
+        if (event.target === fireflyOverlay) closeFireflyGallery();
+      });
+      document.addEventListener('keydown', function (event) {
+        if (!fireflyOverlay.classList.contains('show')) return;
+        if (event.key === 'Escape') closeFireflyGallery();
+        if (event.key === 'ArrowRight') stepFirefly(1);
+        if (event.key === 'ArrowLeft') stepFirefly(-1);
+      });
     });
   </script>
 </body>
