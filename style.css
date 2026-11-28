@@ -1191,3 +1191,11 @@ right:6px;
     object-position: center;
   }
 }
+
+
+/* Mobile seamless-loop reset: hide the instant snap after the duplicate first slide */
+@media (max-width: 768px) {
+  .slideshow-track.no-transition {
+    transition: none !important;
+  }
+}
