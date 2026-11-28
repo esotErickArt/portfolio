@@ -1106,3 +1106,6 @@ right:6px;
 @media (prefers-reduced-motion: reduce) {
   .portfolio-slide, .scroll-prompt span:last-child { transition: none; animation: none; }
 }
+
+/* Automatic slideshow: hide manual side arrows */
+.slideshow-arrow { display: none !important; }
