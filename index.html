@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Erick Morell | Artist • Designer • Fabricator</title>
-  <link rel="stylesheet" href="style.css?v=20261128-desktop-crossfade-4">
+  <link rel="stylesheet" href="style.css?v=20261128-desktop-crossfade-mobile-5">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
@@ -216,6 +216,9 @@
           slide.classList.toggle('active', i === currentSlide);
           slide.setAttribute('aria-hidden', i === currentSlide ? 'false' : 'true');
         });
+        if (window.matchMedia('(max-width: 768px)').matches) {
+          track.style.transform = 'translate3d(-' + (currentSlide * 100) + '%, 0, 0)';
+        }
         Array.from(dots.children).forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
         count.textContent = String(currentSlide + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
         if (restartTimer) startSlideshow();
