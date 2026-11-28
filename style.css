@@ -1109,3 +1109,43 @@ right:6px;
 
 /* Automatic slideshow: hide manual side arrows */
 .slideshow-arrow { display: none !important; }
+
+
+/* Refined homepage slideshow: continuous track movement and uncropped artwork */
+.portfolio-slideshow {
+  isolation: isolate;
+}
+.slideshow-track {
+  position: relative;
+  inset: auto;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transform: translate3d(0, 0, 0);
+  transition: transform 1s cubic-bezier(.22,.61,.36,1);
+  will-change: transform;
+}
+.portfolio-slide {
+  position: relative;
+  inset: auto;
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: none;
+}
+.portfolio-slide.active {
+  transform: none;
+}
+.portfolio-slide img {
+  object-fit: contain;
+  object-position: center;
+  background: #030303;
+}
+@media (prefers-reduced-motion: reduce) {
+  .slideshow-track {
+    transition: none;
+  }
+}
