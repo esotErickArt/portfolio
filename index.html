@@ -239,11 +239,16 @@
         if (restartTimer) startSlideshow();
       }
       track.addEventListener('transitionend', function (event) {
-        if (event.propertyName !== 'transform' || mobileVisualIndex !== slides.length) return;
+        if (event.target !== track || event.propertyName !== 'transform' || mobileVisualIndex !== slides.length) return;
+
+        // The duplicate first slide has finished entering view. Snap back to
+        // the real first slide only after the browser applies transition:none.
         track.classList.add('no-transition');
         mobileVisualIndex = 0;
         track.style.transform = 'translate3d(0, 0, 0)';
         mobileLoopSlide.setAttribute('aria-hidden', 'true');
+        void track.offsetWidth; // Force the transition-free position to take effect.
+
         requestAnimationFrame(function () {
           track.classList.remove('no-transition');
         });
