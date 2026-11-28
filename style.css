@@ -1148,3 +1148,46 @@ right:6px;
 .slideshow-track {
   transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
+
+
+/* Desktop-only slideshow crossfade: keep mobile styling unchanged */
+@media (min-width: 769px) {
+  .portfolio-slideshow {
+    position: relative;
+  }
+  .slideshow-track {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform: none !important;
+    transition: none !important;
+    overflow: hidden;
+  }
+  .portfolio-slide,
+  .portfolio-slide.active {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: none;
+    transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+    pointer-events: none;
+  }
+  .portfolio-slide.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+    pointer-events: auto;
+  }
+  .portfolio-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+}
