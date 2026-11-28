@@ -35,6 +35,12 @@
 
 <div class="projects-row">
 
+    <a class="project-card" href="firefly-totem.html">
+        <img src="images/fabrication/Fireflies%20Statue/6-Final%20Product%20on%20Stage.jpg" alt="Firefly Totem daytime installation">
+        <h3>Firefly Totem</h3>
+        <p>Sculptural Installation · Custom Fabrication</p>
+    </a>
+
     <div class="project-card">
         <img src="images/fabrication/animatronic-creature/1.jpg" alt="Animatronic Creature">
         <h3>Animatronic Creature</h3>
@@ -114,8 +120,10 @@ function showImage() {
 }
 
 document.querySelectorAll(".project-card").forEach(card => {
-    card.addEventListener("click", () => {
+    card.addEventListener("click", (event) => {
         const title = card.querySelector("h3").textContent;
+        if (!projects[title]) return;
+        event.preventDefault();
         gallery = projects[title];
         index = 0;
         showImage();
