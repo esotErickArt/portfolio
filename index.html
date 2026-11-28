@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Erick Morell | Artist • Designer • Fabricator</title>
-  <link rel="stylesheet" href="style.css?v=20261128-fullscreen-slideshow-1">
+  <link rel="stylesheet" href="style.css?v=20261128-fullscreen-slideshow-2">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
@@ -56,8 +56,6 @@
           <div class="slide-caption"><h1>Selected Artwork</h1></div>
         </article>
       </div>
-      <button class="slideshow-arrow slideshow-prev" id="slide-prev" type="button" aria-label="Previous work">‹</button>
-      <button class="slideshow-arrow slideshow-next" id="slide-next" type="button" aria-label="Next work">›</button>
       <div class="slideshow-footer">
         <div class="slideshow-dots" id="slideshow-dots" aria-label="Choose a project"></div>
         <a class="scroll-prompt" href="#about"><span>SCROLL TO EXPLORE</span><span aria-hidden="true">↓</span></a>
@@ -120,7 +118,6 @@
     document.addEventListener('DOMContentLoaded', function () {
       const overlay = document.getElementById('relief-video-lightbox');
       const video = document.getElementById('relief-video');
-      const openButton = document.getElementById('open-relief-video');
       const closeButton = document.getElementById('close-relief-video');
 
       function openVideo() {
@@ -139,13 +136,61 @@
         document.body.classList.remove('lightbox-open');
       }
 
-      openButton.addEventListener('click', openVideo);
       closeButton.addEventListener('click', closeVideo);
       overlay.addEventListener('click', function (event) {
         if (event.target === overlay) closeVideo();
       });
       document.addEventListener('keydown', function (event) {
         if (event.key === 'Escape' && overlay.classList.contains('show')) closeVideo();
+      });
+
+      const fireflyOverlay = document.getElementById('firefly-photo-lightbox');
+      const fireflyImage = document.getElementById('firefly-gallery-image');
+      const fireflyCaption = document.getElementById('firefly-gallery-caption');
+      const fireflyImages = [
+        { src: 'images/fabrication/Fireflies%20Statue/6-Final%20Product%20on%20Stage.jpg', caption: 'Daytime installation' },
+        { src: 'images/fabrication/Fireflies%20Statue/7-Final%20Product%20on%20Stage.jpg', caption: 'Nighttime installation' }
+      ];
+      let fireflyIndex = 0;
+      let fireflyAdvanceTimer;
+
+      function showFireflyImage() {
+        fireflyImage.src = fireflyImages[fireflyIndex].src;
+        fireflyCaption.textContent = fireflyImages[fireflyIndex].caption;
+      }
+      function closeFireflyGallery() {
+        clearTimeout(fireflyAdvanceTimer);
+        fireflyOverlay.classList.remove('show');
+        fireflyOverlay.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('lightbox-open');
+      }
+      function openFireflyGallery() {
+        fireflyIndex = 0;
+        showFireflyImage();
+        fireflyOverlay.classList.add('show');
+        fireflyOverlay.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('lightbox-open');
+        fireflyAdvanceTimer = setTimeout(function () {
+          fireflyIndex = 1;
+          showFireflyImage();
+        }, 3000);
+      }
+      function stepFirefly(direction) {
+        clearTimeout(fireflyAdvanceTimer);
+        fireflyIndex = (fireflyIndex + direction + fireflyImages.length) % fireflyImages.length;
+        showFireflyImage();
+      }
+      document.getElementById('close-firefly-gallery').addEventListener('click', closeFireflyGallery);
+      document.getElementById('firefly-prev').addEventListener('click', function () { stepFirefly(-1); });
+      document.getElementById('firefly-next').addEventListener('click', function () { stepFirefly(1); });
+      fireflyOverlay.addEventListener('click', function (event) {
+        if (event.target === fireflyOverlay) closeFireflyGallery();
+      });
+      document.addEventListener('keydown', function (event) {
+        if (!fireflyOverlay.classList.contains('show')) return;
+        if (event.key === 'Escape') closeFireflyGallery();
+        if (event.key === 'ArrowRight') stepFirefly(1);
+        if (event.key === 'ArrowLeft') stepFirefly(-1);
       });
 
       const slides = Array.from(document.querySelectorAll('.portfolio-slide'));
@@ -155,7 +200,6 @@
       let currentSlide = 0;
       let slideshowTimer;
       let touchStartX = 0;
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       slides.forEach((slide, i) => {
         const dot = document.createElement('button');
@@ -178,12 +222,10 @@
       }
       function startSlideshow() {
         clearInterval(slideshowTimer);
-        if (!reducedMotion && !document.hidden) {
+        if (!document.hidden) {
           slideshowTimer = setInterval(() => showSlide(currentSlide + 1, false), 3000);
         }
       }
-      document.getElementById('slide-prev').addEventListener('click', () => showSlide(currentSlide - 1, true));
-      document.getElementById('slide-next').addEventListener('click', () => showSlide(currentSlide + 1, true));
       track.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
       track.addEventListener('touchend', e => {
         const delta = e.changedTouches[0].screenX - touchStartX;
@@ -201,7 +243,7 @@
           if (button.dataset.media === 'firefly') openFireflyGallery();
         });
       });
-      
+
     });
   </script>
 </body>
